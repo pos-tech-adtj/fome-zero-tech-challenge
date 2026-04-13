@@ -21,12 +21,12 @@ RUN mvn clean install -DskipTests
 
 
 # ================= STAGE 2: Runtime =================
-# Usa uma imagem mínima, apenas com o Java Runtime Environment (JRE).
-# Isso torna a imagem final muito menor e mais segura removendo ferramentas de build
-FROM eclipse-temurin:21-jre-jammy
+# Usa uma imagem mínima Alpine, apenas com o Java Runtime Environment (JRE).
+# Alpine reduz a imagem final de ~280MB para ~150MB.
+FROM eclipse-temurin:21-jre-alpine
 
 # Cria um grupo e um usuário de sistema dedicados para a aplicação.
-RUN groupadd --system appgroup && useradd --system --gid appgroup appuser
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 # Define o diretório de trabalho.
 WORKDIR /app
