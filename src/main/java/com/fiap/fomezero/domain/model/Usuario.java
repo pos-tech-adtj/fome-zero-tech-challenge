@@ -54,7 +54,7 @@ public class Usuario {
     @Column(name = "tipo_usuario", nullable = false, columnDefinition = "tipo_usuario_enum")
     private TipoUsuario tipoUsuario;
 
-    @Column(name = "data_ultima_alteracao_senha")
+    @Column(name = "data_ultima_alteracao_senha", nullable = false)
     private LocalDateTime dataUltimaAlteracaoSenha;
 
     @CreationTimestamp

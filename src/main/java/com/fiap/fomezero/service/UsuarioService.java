@@ -4,6 +4,7 @@ import com.fiap.fomezero.domain.model.Usuario;
 import com.fiap.fomezero.dto.request.UsuarioCreateRequest;
 import com.fiap.fomezero.dto.response.UsuarioResponse;
 import com.fiap.fomezero.exception.EmailJaCadastradoException;
+import com.fiap.fomezero.exception.LoginJaCadastradoException;
 import com.fiap.fomezero.mapper.UsuarioMapper;
 import com.fiap.fomezero.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,10 @@ public class UsuarioService {
 
         if (usuarioRepository.existsByEmail(request.getEmail())) {
             throw new EmailJaCadastradoException();
+        }
+
+        if (usuarioRepository.existsByLogin(request.getLogin())) {
+            throw new LoginJaCadastradoException();
         }
 
         Usuario usuario = UsuarioMapper.toEntity(request);

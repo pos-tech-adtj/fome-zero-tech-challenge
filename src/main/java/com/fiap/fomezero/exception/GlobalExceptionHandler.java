@@ -23,6 +23,16 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(LoginJaCadastradoException.class)
+    public ProblemDetail loginJaCadastrado(LoginJaCadastradoException e) {
+
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.CONFLICT);
+        problemDetail.setTitle("Login já cadastrado");
+        problemDetail.setDetail(e.getMessage());
+
+        return problemDetail;
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationErrors(MethodArgumentNotValidException e) {
 
