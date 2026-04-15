@@ -1,27 +1,26 @@
 package com.fiap.fomezero.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
 
-@Data
-public class EnderecoRequest {
+public record EnderecoRequest(
 
-    @NotBlank
-    private String rua;
+        @NotBlank
+        String rua,
 
-    @NotBlank
-    private String numero;
+        @NotBlank
+        String numero,
 
-    private String complemento;
+        String complemento,
 
-    private String bairro;
+        String bairro,
 
-    @NotBlank
-    private String cidade;
+        @NotBlank
+        String cidade,
 
-    @NotBlank
-    private String estado;
+        @NotBlank
+        String estado,
 
-    @NotBlank
-    private String cep;
-}
+        @NotBlank
+        String cep
+
+) {}
