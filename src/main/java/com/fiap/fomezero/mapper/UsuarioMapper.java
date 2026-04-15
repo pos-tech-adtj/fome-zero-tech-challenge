@@ -14,26 +14,26 @@ public class UsuarioMapper {
 
         Endereco endereco = null;
 
-        if (request.getEndereco() != null) {
+        if (request.endereco() != null) {
             endereco = Endereco.builder()
-                    .rua(request.getEndereco().getRua())
-                    .numero(request.getEndereco().getNumero())
-                    .complemento(request.getEndereco().getComplemento())
-                    .bairro(request.getEndereco().getBairro())
-                    .cidade(request.getEndereco().getCidade())
-                    .estado(request.getEndereco().getEstado())
-                    .cep(request.getEndereco().getCep())
+                    .rua(request.endereco().getRua())
+                    .numero(request.endereco().getNumero())
+                    .complemento(request.endereco().getComplemento())
+                    .bairro(request.endereco().getBairro())
+                    .cidade(request.endereco().getCidade())
+                    .estado(request.endereco().getEstado())
+                    .cep(request.endereco() .getCep())
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
                     .build();
         }
 
         return Usuario.builder()
-                .nome(request.getNome())
-                .email(request.getEmail())
-                .login(request.getLogin())
-                .senha(request.getSenha())
-                .tipoUsuario(request.getTipoUsuario())
+                .nome(request.nome())
+                .email(request.email())
+                .login(request.login())
+                .senha(request.senha())
+                .tipoUsuario(request.tipoUsuario())
                 .dataUltimaAlteracaoSenha(LocalDateTime.now())
                 .endereco(endereco)
                 .createdAt(LocalDateTime.now())

@@ -5,27 +5,26 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 
-@Data
-public class UsuarioCreateRequest {
+public record UsuarioCreateRequest(
 
-    @NotBlank
-    private String nome;
+        @NotBlank
+        String nome,
 
-    @NotBlank
-    @Email
-    private String email;
+        @NotBlank
+        @Email
+        String email,
 
-    @NotBlank
-    private String login;
+        @NotBlank
+        String login,
 
-    @NotBlank
-    private String senha;
+        @NotBlank
+        String senha,
 
-    @NotNull
-    private TipoUsuario tipoUsuario;
+        @NotNull
+        TipoUsuario tipoUsuario,
 
-    @Valid
-    private EnderecoRequest endereco;
+        @Valid
+        EnderecoRequest endereco
+) {
 }

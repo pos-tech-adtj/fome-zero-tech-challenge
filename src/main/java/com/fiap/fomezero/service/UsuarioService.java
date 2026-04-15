@@ -18,11 +18,11 @@ public class UsuarioService {
 
     public UsuarioResponse criarUsuario(UsuarioCreateRequest request) {
 
-        if (usuarioRepository.existsByEmail(request.getEmail())) {
+        if (usuarioRepository.existsByEmail(request.email())) {
             throw new EmailJaCadastradoException();
         }
 
-        if (usuarioRepository.existsByLogin(request.getLogin())) {
+        if (usuarioRepository.existsByLogin(request.login())) {
             throw new LoginJaCadastradoException();
         }
 
