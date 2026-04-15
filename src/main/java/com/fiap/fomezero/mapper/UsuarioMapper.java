@@ -16,13 +16,13 @@ public class UsuarioMapper {
 
         if (request.endereco() != null) {
             endereco = Endereco.builder()
-                    .rua(request.endereco().getRua())
-                    .numero(request.endereco().getNumero())
-                    .complemento(request.endereco().getComplemento())
-                    .bairro(request.endereco().getBairro())
-                    .cidade(request.endereco().getCidade())
-                    .estado(request.endereco().getEstado())
-                    .cep(request.endereco() .getCep())
+                    .rua(request.endereco().rua())
+                    .numero(request.endereco().numero())
+                    .complemento(request.endereco().complemento())
+                    .bairro(request.endereco().bairro())
+                    .cidade(request.endereco().cidade())
+                    .estado(request.endereco().estado())
+                    .cep(request.endereco() .cep())
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
                     .build();
