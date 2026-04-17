@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+
+  # ── Banco de Dados PostgreSQL ─────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: restaurante-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       ${DB_NAME:-restaurante_db}
+      POSTGRES_USER:     ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - restaurante-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-restaurante_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Aplicação Spring Boot ─────────────────────────────────────────────────────
+  restaurante-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: restaurante-api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST:     postgres
+      DB_PORT:     5432
+      DB_NAME:     ${DB_NAME:-restaurante_db}
+      DB_USER:     ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      SERVER_PORT: 8080
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    networks:
+      - restaurante-net
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  restaurante-net:
+    driver: bridge
