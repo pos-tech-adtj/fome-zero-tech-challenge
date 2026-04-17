@@ -32,8 +32,8 @@ public class Endereco {
     @Column(nullable = false, length = 150)
     private String rua;
 
-    @Column(nullable = false, length = 20)
-    private String numero;
+    @Column(nullable = false)
+    private Integer numero;
 
     @Column(length = 100)
     private String complemento;

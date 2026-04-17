@@ -23,7 +23,7 @@ CREATE TABLE usuarios (
 
     tipo_usuario tipo_usuario_enum NOT NULL,
 
-    data_ultima_alteracao TIMESTAMP NOT NULL,
+    data_ultima_alteracao_senha TIMESTAMP NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

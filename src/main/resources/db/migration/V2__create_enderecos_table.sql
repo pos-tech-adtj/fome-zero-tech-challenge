@@ -8,7 +8,7 @@ CREATE TABLE enderecos (
     id BIGINT NOT NULL DEFAULT nextval('enderecos_id_seq'),
 
     rua VARCHAR(150) NOT NULL,
-    numero VARCHAR(20) NOT NULL,
+    numero BIGINT NOT NULL,
     complemento VARCHAR(100),
     bairro VARCHAR(100),
     cidade VARCHAR(100) NOT NULL,
