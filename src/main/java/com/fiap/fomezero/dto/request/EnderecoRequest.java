@@ -1,14 +1,17 @@
 package com.fiap.fomezero.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public record EnderecoRequest(
 
         @NotBlank
         String rua,
 
-        @NotBlank
-        String numero,
+        @NotNull
+        @Positive
+        Integer numero,
 
         String complemento,
 
