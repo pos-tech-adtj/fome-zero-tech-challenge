@@ -33,6 +33,16 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(CredenciaisInvalidasException.class)
+    public ProblemDetail credenciaisInvalidas(CredenciaisInvalidasException e) {
+
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED);
+        problemDetail.setTitle("Credenciais inválidas");
+        problemDetail.setDetail(e.getMessage());
+
+        return problemDetail;
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationErrors(MethodArgumentNotValidException e) {
 
