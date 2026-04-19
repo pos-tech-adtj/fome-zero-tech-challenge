@@ -22,7 +22,7 @@ public class UsuarioMapper {
                     .bairro(request.endereco().bairro())
                     .cidade(request.endereco().cidade())
                     .estado(request.endereco().estado())
-                    .cep(request.endereco() .cep())
+                    .cep(request.endereco().cep())
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
                     .build();
@@ -48,7 +48,7 @@ public class UsuarioMapper {
         if (usuario.getEndereco() != null) {
             enderecoResponse = EnderecoResponse.builder()
                     .rua(usuario.getEndereco().getRua())
-                    .numero(usuario.getEndereco().getNumero())
+                    .numero(String.valueOf(usuario.getEndereco().getNumero()))
                     .complemento(usuario.getEndereco().getComplemento())
                     .bairro(usuario.getEndereco().getBairro())
                     .cidade(usuario.getEndereco().getCidade())
