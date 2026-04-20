@@ -2,6 +2,7 @@ package com.fiap.fomezero.service;
 
 import com.fiap.fomezero.domain.model.Usuario;
 import com.fiap.fomezero.dto.request.UsuarioCreateRequest;
+import com.fiap.fomezero.dto.request.UsuarioUpdateRequest;
 import com.fiap.fomezero.dto.response.UsuarioResponse;
 import com.fiap.fomezero.exception.EmailJaCadastradoException;
 import com.fiap.fomezero.exception.LoginJaCadastradoException;
@@ -19,18 +20,46 @@ public class UsuarioService {
 
     public UsuarioResponse criarUsuario(UsuarioCreateRequest request) {
 
-        if (usuarioRepository.existsByEmail(request.email())) {
-            throw new EmailJaCadastradoException();
-        }
-
-        if (usuarioRepository.existsByLogin(request.login())) {
-            throw new LoginJaCadastradoException();
-        }
+        validarEmailCadastrado(request.email());
+        validarLoginCadastrado(request.login());
 
         Usuario usuario = UsuarioMapper.toEntity(request);
         usuario = usuarioRepository.save(usuario);
 
         return UsuarioMapper.toResponse(usuario);
+    }
+
+    public UsuarioResponse atualizarUsuario(Long id, UsuarioUpdateRequest request) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
+        validarInformacoesAtualizadas(usuario, request);
+
+        UsuarioMapper.updateEntity(usuario, request);
+        usuario = usuarioRepository.save(usuario);
+
+        return UsuarioMapper.toResponse(usuario);
+    }
+
+    private void validarEmailCadastrado(String email) {
+        if (usuarioRepository.existsByEmail(email)) {
+            throw new EmailJaCadastradoException();
+        }
+    }
+
+    private void validarLoginCadastrado(String login) {
+        if (usuarioRepository.existsByLogin(login)) {
+            throw new LoginJaCadastradoException();
+        }
+    }
+
+    private void validarInformacoesAtualizadas(Usuario usuario, UsuarioUpdateRequest request) {
+        if (request.email() != null && !request.email().equals(usuario.getEmail())) {
+            validarEmailCadastrado(request.email());
+        }
+        if (request.login() != null &&!request.login().equals(usuario.getLogin())) {
+            validarLoginCadastrado(request.login());
+        }
     }
 
     public void deletarUsuario(Long id) {
