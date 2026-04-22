@@ -49,7 +49,7 @@ public class UsuarioMapper {
         if (usuario.getEndereco() != null) {
             enderecoResponse = EnderecoResponse.builder()
                     .rua(usuario.getEndereco().getRua())
-                    .numero(usuario.getEndereco().getNumero())
+                    .numero(String.valueOf(usuario.getEndereco().getNumero()))
                     .complemento(usuario.getEndereco().getComplemento())
                     .bairro(usuario.getEndereco().getBairro())
                     .cidade(usuario.getEndereco().getCidade())
