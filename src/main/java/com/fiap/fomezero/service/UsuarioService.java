@@ -64,6 +64,13 @@ public class UsuarioService {
         }
     }
 
+    public UsuarioResponse buscarUsuarioPorId(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
+        return UsuarioMapper.toResponse(usuario);
+    }
+
     public List<UsuarioResponse> listarTodosUsuarios() {
         List<Usuario> usuarios = usuarioRepository.findAll();
         return usuarios.stream().map(UsuarioMapper::toResponse).toList();
