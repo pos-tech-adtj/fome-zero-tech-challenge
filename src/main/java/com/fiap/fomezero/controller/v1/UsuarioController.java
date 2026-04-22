@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/v1/usuarios")
 @RequiredArgsConstructor
@@ -31,5 +33,13 @@ public class UsuarioController {
         UsuarioResponse usuario = usuarioService.atualizarUsuario(id, request);
 
         return ResponseEntity.ok(usuario);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UsuarioResponse>> listarUsuarios() {
+
+        List<UsuarioResponse> usuarios = usuarioService.listarTodosUsuarios();
+
+        return ResponseEntity.ok(usuarios);
     }
 }
