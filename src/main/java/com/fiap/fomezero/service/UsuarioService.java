@@ -12,6 +12,8 @@ import com.fiap.fomezero.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UsuarioService {
@@ -67,5 +69,10 @@ public class UsuarioService {
             throw new UsuarioNaoEncontradoException();
         }
         usuarioRepository.deleteById(id);
+    }
+
+    public List<UsuarioResponse> listarTodosUsuarios() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        return usuarios.stream().map(UsuarioMapper::toResponse).toList();
     }
 }
