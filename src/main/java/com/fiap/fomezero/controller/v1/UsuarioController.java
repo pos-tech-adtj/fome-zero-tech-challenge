@@ -50,4 +50,12 @@ public class UsuarioController {
 
         return ResponseEntity.ok(usuarios);
     }
+
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<UsuarioResponse>> buscarUsuariosPorNome(@PathVariable String nome) {
+
+        List<UsuarioResponse> usuarios = usuarioService.buscarUsuariosPorNome(nome);
+
+        return ResponseEntity.ok(usuarios);
+    }
 }
