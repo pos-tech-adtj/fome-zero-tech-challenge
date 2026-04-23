@@ -47,10 +47,26 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioResponse> buscarUsuarioPorId(@PathVariable Long id) {
+
+        UsuarioResponse usuario = usuarioService.buscarUsuarioPorId(id);
+
+        return ResponseEntity.ok(usuario);
+    }
+
     @GetMapping
     public ResponseEntity<List<UsuarioResponse>> listarUsuarios() {
 
         List<UsuarioResponse> usuarios = usuarioService.listarTodosUsuarios();
+
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<UsuarioResponse>> buscarUsuariosPorNome(@PathVariable String nome) {
+
+        List<UsuarioResponse> usuarios = usuarioService.buscarUsuariosPorNome(nome);
 
         return ResponseEntity.ok(usuarios);
     }

@@ -70,9 +70,23 @@ public class UsuarioService {
         }
         usuarioRepository.deleteById(id);
     }
+  
+    public UsuarioResponse buscarUsuarioPorId(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
+        return UsuarioMapper.toResponse(usuario);
+    }
 
     public List<UsuarioResponse> listarTodosUsuarios() {
         List<Usuario> usuarios = usuarioRepository.findAll();
+        return usuarios.stream().map(UsuarioMapper::toResponse).toList();
+    }
+
+    public List<UsuarioResponse> buscarUsuariosPorNome(String nome) {
+        List<Usuario> usuarios = usuarioRepository.findAllByNome(nome)
+                .orElseThrow(UsuarioNaoEncontradoException::new);
+
         return usuarios.stream().map(UsuarioMapper::toResponse).toList();
     }
 }
