@@ -64,6 +64,13 @@ public class UsuarioService {
         }
     }
 
+    public void deletarUsuario(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new UsuarioNaoEncontradoException();
+        }
+        usuarioRepository.deleteById(id);
+    }
+  
     public UsuarioResponse buscarUsuarioPorId(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(UsuarioNaoEncontradoException::new);

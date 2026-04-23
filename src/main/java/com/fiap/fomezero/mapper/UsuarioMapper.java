@@ -23,7 +23,7 @@ public class UsuarioMapper {
                     .bairro(request.endereco().bairro())
                     .cidade(request.endereco().cidade())
                     .estado(request.endereco().estado())
-                    .cep(request.endereco() .cep())
+                    .cep(request.endereco().cep())
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
                     .build();
