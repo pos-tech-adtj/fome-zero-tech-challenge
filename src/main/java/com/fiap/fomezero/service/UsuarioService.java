@@ -76,7 +76,7 @@ public class UsuarioService {
         return usuarios.stream().map(UsuarioMapper::toResponse).toList();
     }
 
-    public List<UsuarioResponse> buscarUsuarioPorNome(String nome) {
+    public List<UsuarioResponse> buscarUsuariosPorNome(String nome) {
         List<Usuario> usuarios = usuarioRepository.findAllByNome(nome)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 

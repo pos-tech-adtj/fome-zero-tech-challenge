@@ -52,9 +52,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/nome/{nome}")
-    public ResponseEntity<List<UsuarioResponse>> buscarUsuarioPorNome(@PathVariable String nome) {
+    public ResponseEntity<List<UsuarioResponse>> buscarUsuariosPorNome(@PathVariable String nome) {
 
-        List<UsuarioResponse> usuarios = usuarioService.buscarUsuarioPorNome(nome);
+        List<UsuarioResponse> usuarios = usuarioService.buscarUsuariosPorNome(nome);
 
         return ResponseEntity.ok(usuarios);
     }
