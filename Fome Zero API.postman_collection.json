@@ -1,10 +1,10 @@
 {
   "info": {
-    "_postman_id": "8329accf-3224-4c5e-af43-c94fe369d0f5",
+    "_postman_id": "7da143ca-9770-44bc-9702-154f841bd1f3",
     "name": "Fome Zero API",
     "description": "Collection de testes da API Fome Zero.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "15584391"
+    "_exporter_id": "41738703"
   },
   "item": [
     {
@@ -230,6 +230,122 @@
                     "v1",
                     "usuarios",
                     "{{usuarioId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Atualizar senha com sucesso (204)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura123\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}",
+                    "senha"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Atualizar senha de usuario inexistente (404)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura123\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/99999/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "99999",
+                    "senha"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Atualizar senha com senha atual invalida (404)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura123\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}",
+                    "senha"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Atualizar senha com senha nova igual a atual (404) Copy",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura1234\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}",
+                    "senha"
                   ]
                 }
               },

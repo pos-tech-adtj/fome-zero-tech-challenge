@@ -1,6 +1,7 @@
 package com.fiap.fomezero.controller.v1;
 
 import com.fiap.fomezero.dto.request.UsuarioCreateRequest;
+import com.fiap.fomezero.dto.request.UsuarioSenhaRequest;
 import com.fiap.fomezero.dto.request.UsuarioUpdateRequest;
 import com.fiap.fomezero.dto.response.UsuarioResponse;
 import com.fiap.fomezero.service.UsuarioService;
@@ -9,12 +10,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 import java.util.List;
 
@@ -69,5 +73,11 @@ public class UsuarioController {
         List<UsuarioResponse> usuarios = usuarioService.buscarUsuariosPorNome(nome);
 
         return ResponseEntity.ok(usuarios);
+    }
+
+    @PatchMapping("/{id}/senha")
+    public ResponseEntity<Void> alterarSenha(@PathVariable Long id, @Valid @RequestBody UsuarioSenhaRequest request) {
+        usuarioService.alterarSenha(id, request);
+        return ResponseEntity.noContent().build();
     }
 }
