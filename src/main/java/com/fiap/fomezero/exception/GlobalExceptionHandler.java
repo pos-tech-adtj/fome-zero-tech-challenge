@@ -70,14 +70,4 @@ public class GlobalExceptionHandler {
 
         return problem;
     }
-
-    @ExceptionHandler(UsuarioNaoEncontradoException.class)
-    public ProblemDetail usuarioNaoEncontradoPorId(UsuarioNaoEncontradoException e) {
-
-        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
-        problemDetail.setTitle("Usuário não encontrado");
-        problemDetail.setDetail(e.getMessage());
-
-        return problemDetail;
-    }
 }
