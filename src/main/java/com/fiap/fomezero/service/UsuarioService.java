@@ -101,15 +101,15 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
 
-        if (!usuario.getSenha().equals(request.senhaAtual())) {
+        if (!passwordEncoder.matches(request.senhaAtual(), usuario.getSenha())) {
             throw new SenhaAtualInvalidaException();
         }
 
-        if (request.senhaAtual().equals(request.novaSenha())) {
+        if (passwordEncoder.matches(request.novaSenha(), usuario.getSenha())) {
             throw new SenhaIgualAtualException();
         }
 
-        usuario.setSenha(request.novaSenha());
+        usuario.setSenha(passwordEncoder.encode(request.novaSenha()));
         usuario.setDataUltimaAlteracaoSenha(LocalDateTime.now());
         usuarioRepository.save(usuario);
     }
