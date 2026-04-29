@@ -2,7 +2,6 @@ package com.fiap.fomezero.mapper;
 
 import com.fiap.fomezero.domain.model.Endereco;
 import com.fiap.fomezero.domain.model.Usuario;
-import com.fiap.fomezero.dto.request.EnderecoUpdateRequest;
 import com.fiap.fomezero.dto.request.UsuarioCreateRequest;
 import com.fiap.fomezero.dto.request.UsuarioUpdateRequest;
 import com.fiap.fomezero.dto.response.EnderecoResponse;

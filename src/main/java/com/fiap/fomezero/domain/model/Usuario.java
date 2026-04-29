@@ -1,17 +1,6 @@
 package com.fiap.fomezero.domain.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,8 +9,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collection;
 
 @Entity
 @Table(name = "usuarios")
@@ -29,7 +23,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Usuario {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuarios_seq")
@@ -45,7 +39,6 @@ public class Usuario {
     @Column(nullable = false, unique = true, length = 100)
     private String login;
 
-    /* 255 caracteres para senha!! - Ver se é necessário */
     @Column(nullable = false, length = 255)
     private String senha;
 
@@ -68,4 +61,25 @@ public class Usuario {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        TipoUsuario[] roles = TipoUsuario.values();
+        int currIndex = tipoUsuario.ordinal();
+
+        return Arrays.stream(roles)
+                .filter(role -> role.ordinal() <= currIndex)
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
+                .toList();
+    }
+
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
 }

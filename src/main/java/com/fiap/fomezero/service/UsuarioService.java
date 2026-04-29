@@ -13,6 +13,7 @@ import com.fiap.fomezero.exception.UsuarioNaoEncontradoException;
 import com.fiap.fomezero.mapper.UsuarioMapper;
 import com.fiap.fomezero.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ import java.util.List;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UsuarioResponse criarUsuario(UsuarioCreateRequest request) {
 
@@ -30,6 +32,7 @@ public class UsuarioService {
         validarLoginCadastrado(request.login());
 
         Usuario usuario = UsuarioMapper.toEntity(request);
+        usuario.setSenha(passwordEncoder.encode(request.senha()));
         usuario = usuarioRepository.save(usuario);
 
         return UsuarioMapper.toResponse(usuario);
