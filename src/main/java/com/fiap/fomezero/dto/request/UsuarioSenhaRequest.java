@@ -1,4 +1,14 @@
 package com.fiap.fomezero.dto.request;
 
-public class UsuarioSenhaRequest {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record UsuarioSenhaRequest(
+        @NotBlank(message = "Senha atual é obrigatória")
+        String senhaAtual,
+
+        @NotBlank(message = "Nova senha é obrigatória")
+        @Size(min = 8, message = "A nova senha deve ter no mínimo 8 caracteres")
+        String novaSenha
+) {
 }
