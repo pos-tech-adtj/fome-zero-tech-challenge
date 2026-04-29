@@ -9,11 +9,11 @@ import jakarta.validation.constraints.Positive;
 public record EnderecoRequest(
 
         @Schema(description = "Nome da rua", example = "Rua das Flores")
-        @NotBlank
+        @NotBlank(message = "Nome da rua é obrigatório")
         String rua,
 
         @Schema(description = "Número do imóvel", example = "123")
-        @NotNull
+        @NotNull(message = "Número do imóvel é obrigatório")
         @Positive
         Integer numero,
 
@@ -24,15 +24,15 @@ public record EnderecoRequest(
         String bairro,
 
         @Schema(description = "Cidade", example = "São Paulo")
-        @NotBlank
+        @NotBlank(message = " Cidade é obrigatório")
         String cidade,
 
         @Schema(description = "Estado (sigla)", example = "SP")
-        @NotBlank
+        @NotBlank(message = " Estado é obrigatório")
         String estado,
 
         @Schema(description = "CEP", example = "01310-100")
-        @NotBlank
+        @NotBlank(message = "CEP é obrigatório")
         String cep
 
 ) {}
