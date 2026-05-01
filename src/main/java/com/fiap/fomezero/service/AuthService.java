@@ -6,25 +6,30 @@ import com.fiap.fomezero.dto.response.LoginResponse;
 import com.fiap.fomezero.exception.CredenciaisInvalidasException;
 import com.fiap.fomezero.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
 
     private final UsuarioRepository usuarioRepository;
+    private final AuthenticationManager manager;
 
-    @Transactional(readOnly = true)
     public LoginResponse autenticarUsuario(LoginRequest request) {
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(request.login(), request.senha());
+        Authentication authentication = manager.authenticate(authToken);
+
+        if (!authentication.isAuthenticated()) {
+            throw new CredenciaisInvalidasException();
+        }
 
         Usuario usuario = usuarioRepository.findByLogin(request.login())
                 .orElseThrow(CredenciaisInvalidasException::new);
 
-        if (!usuario.getSenha().equals(request.senha())) {
-            throw new CredenciaisInvalidasException();
-        }
-
         return LoginResponse.from(usuario);
     }
+
 }
