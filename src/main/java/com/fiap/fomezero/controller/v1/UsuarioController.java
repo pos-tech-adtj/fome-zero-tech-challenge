@@ -18,9 +18,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
+@Tag(name = "Usuários", description = "Gerenciamento de usuários da plataforma de sistema de restaurantes")
 @RestController
 @RequestMapping("/v1/usuarios")
 @RequiredArgsConstructor
@@ -28,6 +30,14 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
+    @Operation(summary = "Criar usuário", description = "Cadastra um novo usuário na plataforma")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = UsuarioResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Dados de entrada inválidos", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Email ou login já cadastrado", content = @Content)
+    })
     @PostMapping
     public ResponseEntity<UsuarioResponse> criarUsuario(@Valid @RequestBody UsuarioCreateRequest request) {
         UsuarioResponse usuario = usuarioService.criarUsuario(request);
