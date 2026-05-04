@@ -53,6 +53,26 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(SenhaAtualInvalidaException.class)
+    public ProblemDetail senhaAtualInvalida(SenhaAtualInvalidaException e) {
+
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.UNPROCESSABLE_ENTITY);
+        problemDetail.setTitle("Senha atual inválida");
+        problemDetail.setDetail(e.getMessage());
+
+        return problemDetail;
+    }
+
+    @ExceptionHandler(SenhaIgualAtualException.class)
+    public ProblemDetail senhaIgualAtual(SenhaIgualAtualException e) {
+
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.UNPROCESSABLE_ENTITY);
+        problemDetail.setTitle("Nova senha igual à atual");
+        problemDetail.setDetail(e.getMessage());
+
+        return problemDetail;
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ProblemDetail handleValidationErrors(MethodArgumentNotValidException e) {
 
