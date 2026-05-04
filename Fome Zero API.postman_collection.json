@@ -14,7 +14,7 @@
           "name": "Cadastro",
           "item": [
             {
-              "name": "Cadastro de usuario valido (CLIENTE)",
+              "name": "Cadastro de usuario valido (CLIENTE) (201)",
               "request": {
                 "method": "POST",
                 "header": [
@@ -25,7 +25,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"nome\": \"Rafael Souza\",\n  \"email\": \"rafael@email.com\",\n  \"login\": \"rafael.souza\",\n  \"senha\": \"SenhaSegura123\",\n  \"tipoUsuario\": \"CLIENTE\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": 100,\n    \"complemento\": \"Apto 12\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\",\n    \"cep\": \"01000-000\"\n  }\n}"
+                  "raw": "{\n  \"nome\": \"Rafael Souza\",\n  \"email\": \"rafael@email.com\",\n  \"login\": \"rafael.souza\",\n  \"senha\": \"SenhaSegura123\",\n  \"tipoUsuario\": \"CLIENTE\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores\",\n    \"numero\": 100,\n    \"complemento\": \"Apto 12\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"S�o Paulo\",\n    \"estado\": \"SP\",\n    \"cep\": \"01000-000\"\n  }\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/v1/usuarios",
@@ -41,7 +41,7 @@
               "response": []
             },
             {
-              "name": "Cadastro de usuario valido (DONO_RESTAURANTE)",
+              "name": "Cadastro de usuario valido (DONO_RESTAURANTE) (201)",
               "request": {
                 "method": "POST",
                 "header": [
@@ -52,7 +52,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"nome\": \"Maria Oliveira\",\n  \"email\": \"maria@restaurante.com\",\n  \"login\": \"maria.oliveira\",\n  \"senha\": \"SenhaSegura456\",\n  \"tipoUsuario\": \"DONO_RESTAURANTE\",\n  \"endereco\": {\n    \"rua\": \"Av. Paulista\",\n    \"numero\": 1500,\n    \"complemento\": \"Sala 302\",\n    \"bairro\": \"Bela Vista\",\n    \"cidade\": \"São Paulo\",\n    \"estado\": \"SP\",\n    \"cep\": \"01310-100\"\n  }\n}"
+                  "raw": "{\n  \"nome\": \"Maria Oliveira\",\n  \"email\": \"maria@restaurante.com\",\n  \"login\": \"maria.oliveira\",\n  \"senha\": \"SenhaSegura456\",\n  \"tipoUsuario\": \"DONO_RESTAURANTE\",\n  \"endereco\": {\n    \"rua\": \"Av. Paulista\",\n    \"numero\": 1500,\n    \"complemento\": \"Sala 302\",\n    \"bairro\": \"Bela Vista\",\n    \"cidade\": \"S�o Paulo\",\n    \"estado\": \"SP\",\n    \"cep\": \"01310-100\"\n  }\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/v1/usuarios",
@@ -68,7 +68,7 @@
               "response": []
             },
             {
-              "name": "Cadastro de usuario valido (sem endereco)",
+              "name": "Cadastro de usuario valido (sem endereco) (201)",
               "request": {
                 "method": "POST",
                 "header": [
@@ -79,7 +79,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"nome\": \"João Silva\",\n  \"email\": \"joao@email.com\",\n  \"login\": \"joao.silva\",\n  \"senha\": \"SenhaSegura789\",\n  \"tipoUsuario\": \"CLIENTE\"\n}"
+                  "raw": "{\n  \"nome\": \"Jo�o Silva\",\n  \"email\": \"joao@email.com\",\n  \"login\": \"joao.silva\",\n  \"senha\": \"SenhaSegura789\",\n  \"tipoUsuario\": \"CLIENTE\"\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/v1/usuarios",
@@ -201,6 +201,60 @@
                 }
               },
               "response": []
+            },
+            {
+              "name": "ERRO - Senha menor que 8 caracteres (400)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nome\": \"Teste Senha Curta\",\n  \"email\": \"senha.curta@email.com\",\n  \"login\": \"senha.curta\",\n  \"senha\": \"123\",\n  \"tipoUsuario\": \"CLIENTE\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Endereco com campos obrigatorios faltando (400)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nome\": \"Teste Endereco\",\n  \"email\": \"endereco@email.com\",\n  \"login\": \"teste.endereco\",\n  \"senha\": \"SenhaSegura123\",\n  \"tipoUsuario\": \"CLIENTE\",\n  \"endereco\": {\n    \"rua\": \"\",\n    \"numero\": null,\n    \"complemento\": \"\",\n    \"bairro\": \"\",\n    \"cidade\": \"\",\n    \"estado\": \"\",\n    \"cep\": \"\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
             }
           ]
         },
@@ -236,122 +290,6 @@
               "response": []
             },
             {
-              "name": "Atualizar senha com sucesso (204)",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura123\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
-                },
-                "url": {
-                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "v1",
-                    "usuarios",
-                    "{{usuarioId}}",
-                    "senha"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "ERRO - Atualizar senha de usuario inexistente (404)",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura123\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
-                },
-                "url": {
-                  "raw": "{{baseUrl}}/v1/usuarios/99999/senha",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "v1",
-                    "usuarios",
-                    "99999",
-                    "senha"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "ERRO - Atualizar senha com senha atual invalida (404)",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura123\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
-                },
-                "url": {
-                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "v1",
-                    "usuarios",
-                    "{{usuarioId}}",
-                    "senha"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "ERRO - Atualizar senha com senha nova igual a atual (404) Copy",
-              "request": {
-                "method": "PATCH",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura1234\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
-                },
-                "url": {
-                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "v1",
-                    "usuarios",
-                    "{{usuarioId}}",
-                    "senha"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
               "name": "Atualizar apenas o nome (200)",
               "request": {
                 "method": "PUT",
@@ -364,6 +302,34 @@
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"nome\": \"Rafael Bezerra Souza\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Atualizar parcialmente o endereco (200)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"endereco\": {\n    \"complemento\": \"Bloco B - Apto 304\",\n    \"cep\": \"01310-200\"\n  }\n}"
                 },
                 "url": {
                   "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}",
@@ -462,6 +428,213 @@
                 }
               },
               "response": []
+            },
+            {
+              "name": "ERRO - Email invalido na atualizacao (400)",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"email-invalido\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Alteracao de Senha",
+          "item": [
+            {
+              "name": "Atualizar senha com sucesso (204)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura123\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}",
+                    "senha"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Atualizar senha de usuario inexistente (404)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura123\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/99999/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "99999",
+                    "senha"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Atualizar senha com senha atual invalida (422)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"SenhaErrada000\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}",
+                    "senha"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Nova senha igual a atual (422)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura1234\",\n  \"novaSenha\": \"SenhaSegura1234\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}",
+                    "senha"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Nova senha menor que 8 caracteres (400)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"SenhaSegura1234\",\n  \"novaSenha\": \"123\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}",
+                    "senha"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Campos obrigatorios faltando na alteracao de senha (400)",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senhaAtual\": \"\",\n  \"novaSenha\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}/senha",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "{{usuarioId}}",
+                    "senha"
+                  ]
+                }
+              },
+              "response": []
             }
           ]
         },
@@ -530,6 +703,51 @@
                 "method": "GET",
                 "header": [],
                 "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/nome/Rafael Souza",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "nome",
+                    "Rafael Souza"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ERRO - Buscar usuario por Nome inexistente (404)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/usuarios/nome/Usuario Inexistente",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "usuarios",
+                    "nome",
+                    "Usuario Inexistente"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Exclusao",
+          "item": [
+            {
+              "name": "Deletar usuario com sucesso (204)",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
                   "raw": "{{baseUrl}}/v1/usuarios/{{usuarioId}}",
                   "host": [
                     "{{baseUrl}}"
@@ -544,9 +762,9 @@
               "response": []
             },
             {
-              "name": "ERRO - Buscar usuario por Nome inexistente (404)",
+              "name": "ERRO - Deletar usuario inexistente (404)",
               "request": {
-                "method": "GET",
+                "method": "DELETE",
                 "header": [],
                 "url": {
                   "raw": "{{baseUrl}}/v1/usuarios/99999",
@@ -687,7 +905,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:8080"
+      "value": "http://localhost:8082"
     },
     {
       "key": "usuarioId",
